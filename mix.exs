@@ -6,8 +6,9 @@ defmodule Compiler.MixProject do
       app: :compiler,
       version: "0.1.0",
       elixir: "~> 1.10",
+      deps: deps(),
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      escript: [main_module: Compiler.CLI]
     ]
   end
 
