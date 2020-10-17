@@ -8,7 +8,16 @@ defmodule Lisper.Token do
     "if" => :if,
     "define" => :define,
     "t" => true,
-    "nil" => nil
+    "nil" => nil,
+    "max" => :max,
+    "min" => :min,
+    "mod" => :mod,
+    "rem" => :rem,
+    "incf" => :incf,
+    "decf" => :decf,
+    "and" => :and,
+    "or" => :or,
+    "not" => :not
   }
 
   @types %{
@@ -22,6 +31,21 @@ defmodule Lisper.Token do
     minus: "-",
     asterisk: "*",
     slash: "/",
+    equal: "=",
+    not_eq: "/=",
+    gt: ">",
+    lt: "<",
+    gt_eq: ">=",
+    lt_eq: "<=",
+    max: "MAX",
+    min: "MIN",
+    mod: "MODULUS",
+    rem: "REMAINDER",
+    incf: "INCREMENT",
+    decf: "DECREMENT",
+    and: "AND",
+    or: "OR",
+    not: "NOT",
     # delimiters
     dot: ".",
     lparen: "(",
@@ -31,7 +55,8 @@ defmodule Lisper.Token do
     t: "TRUE",
     nil: "NIL",
     if: "IF",
-    lambda: "LAMBDA"
+    lambda: "LAMBDA",
+    define: "DEFINE"
   }
 
   def new(type: type, literal: literal) when is_atom(type) and is_binary(literal) do

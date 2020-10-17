@@ -3,12 +3,12 @@ defmodule Compiler.MixProject do
 
   def project do
     [
-      app: :compiler,
+      app: :lisper,
       version: "0.1.0",
       elixir: "~> 1.10",
       deps: deps(),
       start_permanent: Mix.env() == :prod,
-      escript: [main_module: Compiler.CLI]
+      escript: [main_module: Lisper.CLI]
     ]
   end
 
