@@ -82,6 +82,8 @@ defmodule Lisper.Lexer do
         "/" -> Token.new(type: :slash, literal: ch)
         "<" -> Token.new(type: :lt, literal: ch)
         ">" -> Token.new(type: :gt, literal: ch)
+        "(" -> Token.new(type: :lparen, literal: ch)
+        ")" -> Token.new(type: :rparen, literal: ch)
         _ -> Token.new(type: :illegal, literal: "X")
       end
 

@@ -6,7 +6,7 @@ defmodule Lisper.Token do
     "defun" => :function,
     "lambda" => :lambda,
     "if" => :if,
-    "define" => :define,
+    "setq" => :setq,
     "t" => true,
     "nil" => nil,
     "max" => :max,
@@ -56,7 +56,7 @@ defmodule Lisper.Token do
     nil: "NIL",
     if: "IF",
     lambda: "LAMBDA",
-    define: "DEFINE"
+    setq: "ASSIGN"
   }
 
   def new(type: type, literal: literal) when is_atom(type) and is_binary(literal) do

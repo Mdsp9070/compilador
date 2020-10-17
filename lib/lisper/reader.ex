@@ -5,6 +5,6 @@ defmodule Lisper.Reader do
     {:ok, input} = File.read(path)
     tokens = Lexer.tokenize(input)
 
-    inspect(tokens)
+    IO.inspect(tokens)
   end
 end
