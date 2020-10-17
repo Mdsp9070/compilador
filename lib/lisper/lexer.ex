@@ -91,7 +91,7 @@ defmodule Lisper.Lexer do
   end
 
   defp is_whitespace(ch) do
-    ch == " " || ch == "\n" || ch == "\r" || ch == "\t"
+    ch == " " or ch == "\n" or ch == "\r" or ch == "\t"
   end
 
   defp is_binary_operator(chars) do
