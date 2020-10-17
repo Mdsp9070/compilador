@@ -1,4 +1,4 @@
-# Compilador para a linguagem 
+# Compilador para a linguagem Lisp
 
 Trabalho para a matéria de Compiladores da faculdade.
 
