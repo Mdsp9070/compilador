@@ -77,8 +77,9 @@ defmodule Lisper.Lexer do
   defp read_next_char(_chars = [ch | rest], tokens) do
     token =
       case ch do
-        "=" -> Token.new(type: :eq, literal: ch)
+        "=" -> Token.new(type: :equal, literal: ch)
         "*" -> Token.new(type: :asterisk, literal: ch)
+        "+" -> Token.new(type: :plus, literal: ch)
         "/" -> Token.new(type: :slash, literal: ch)
         "<" -> Token.new(type: :lt, literal: ch)
         ">" -> Token.new(type: :gt, literal: ch)
