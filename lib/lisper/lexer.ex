@@ -80,6 +80,7 @@ defmodule Lisper.Lexer do
         "=" -> Token.new(type: :equal, literal: ch)
         "*" -> Token.new(type: :asterisk, literal: ch)
         "+" -> Token.new(type: :plus, literal: ch)
+        "-" -> Token.new(type: :minus, literal: ch)
         "/" -> Token.new(type: :slash, literal: ch)
         "<" -> Token.new(type: :lt, literal: ch)
         ">" -> Token.new(type: :gt, literal: ch)
