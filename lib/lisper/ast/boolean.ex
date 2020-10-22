@@ -9,6 +9,6 @@ defmodule Lisper.Ast.Boolean do
 
     def node_type(_), do: :expression
 
-    def to_string(expression), do: expression.token.literal
+    def to_string(expression), do: "(#{expression.token.literal})"
   end
 end

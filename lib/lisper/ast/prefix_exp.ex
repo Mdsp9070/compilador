@@ -7,7 +7,8 @@ defmodule Lisper.Ast.PrefixExpression do
     :token,
     :operator,
     # expression
-    :right
+    :right,
+    :left
   ]
 
   defimpl Node, for: __MODULE__ do

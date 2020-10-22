@@ -1,4 +1,4 @@
-defmodule Lisper.Ast.Identifier do
+defmodule Lisper.Ast.Atom do
   alias Lisper.Ast.Node
 
   @enforce_keys [:token, :value]
@@ -9,6 +9,6 @@ defmodule Lisper.Ast.Identifier do
 
     def node_type(_), do: :expression
 
-    def to_string(ident), do: ident.value
+    def to_string(ident), do: "(#{ident.value})"
   end
 end

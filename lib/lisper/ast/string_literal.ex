@@ -9,6 +9,6 @@ defmodule Lisper.Ast.StringLiteral do
 
     def node_type(_), do: :expression
 
-    def to_string(literal), do: literal.token.literal
+    def to_string(literal), do: "(#{literal.token.literal})"
   end
 end

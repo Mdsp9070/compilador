@@ -15,7 +15,7 @@ defmodule Lisper.Vector do
         |> Enum.map(&Node.to_string/1)
         |> Enum.join(" ")
 
-      "([#{elements}])"
+      "#(#{elements})"
     end
   end
 end

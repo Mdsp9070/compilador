@@ -19,7 +19,7 @@ defmodule Lisper.Ast.IfExp do
       consequence = Node.to_string(exp.consequence)
       alternative = alternative_to_string(exp.alternative)
 
-      "if (#{condition}) (#{consequence}) (#{alternative})"
+      "(if (#{condition}) (#{consequence}) (#{alternative}))"
     end
 
     def alternative_to_string(alt) do

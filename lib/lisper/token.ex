@@ -1,6 +1,6 @@
 defmodule Lisper.Token do
-  @enforce_keys [:type, :literal]
-  defstruct [:type, :literal]
+  @enforce_keys [:type, :literal, :line]
+  defstruct [:type, :literal, :line]
 
   @keywords %{
     "defun" => :function,
@@ -64,9 +64,9 @@ defmodule Lisper.Token do
     vector: "VECTOR"
   }
 
-  def new(type: type, literal: literal) when is_atom(type) and is_binary(literal) do
+  def new(type: type, literal: literal, line: line) when is_atom(type) and is_binary(literal) do
     if Map.has_key?(@types, type) do
-      %__MODULE__{type: type, literal: literal}
+      %__MODULE__{type: type, literal: literal, line: line}
     else
       raise "Token with type #{inspect(type)} is not defined!"
     end
