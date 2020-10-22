@@ -1,9 +1,9 @@
 defmodule Lisper.CLI do
-  alias Lisper.Reader
+  alias Lisper.Lexer
 
-  def main(args) do
-    [path | _] = args
+  def main(args \\ []) do
+    {:ok, input} = File.read(List.first(args))
 
-    path |> Reader.read()
+    input |> Lexer.tokenize() |> IO.inspect()
   end
 end
