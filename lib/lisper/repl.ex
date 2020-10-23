@@ -1,7 +1,7 @@
 defmodule Lisper.Repl do
   alias Lisper.Lexer
 
-  @prompt ">> "
+  @prompt "lisper> "
 
   def loop() do
     input = IO.gets(@prompt)
