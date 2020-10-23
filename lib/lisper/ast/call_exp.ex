@@ -1,4 +1,4 @@
-defmodule Lisper.Ast.CallExp do
+defmodule Lisper.Ast.CallExpression do
   alias Lisper.Ast.Node
 
   @enforce_keys [:token, :function, :arguments]

@@ -1,4 +1,4 @@
-defmodule Lisper.Ast.IfExp do
+defmodule Lisper.Ast.IfExpression do
   alias Lisper.Ast.Node
 
   @enforce_keys [:token, :condition, :consequence]

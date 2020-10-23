@@ -1,4 +1,4 @@
-defmodule Lisper.Ast.ExpressionStmt do
+defmodule Lisper.Ast.ExpressionStatement do
   alias Lisper.Ast.Node
 
   @enforce_keys [:token, :expression]

@@ -1,4 +1,4 @@
-defmodule Lisper.Ast.Boolean do
+defmodule Lisper.Ast.BooleanLiteral do
   alias Lisper.Ast.Node
 
   @enforce_keys [:token, :value]
