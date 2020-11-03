@@ -1,4 +1,8 @@
 defmodule Lisper.Lexer do
+  @moduledoc """
+  Implementation of Lisp lexer, or lexical analysis
+  """
+
   alias Lisper.Token
 
   @spec tokenize(String.t()) :: [Token]
@@ -7,12 +11,10 @@ defmodule Lisper.Lexer do
     tokenize(chars, [], 1)
   end
 
-  @spec tokenize([], [Token], integer) :: [Token]
   defp tokenize(_chars = [], tokens, line) do
     Enum.reverse([Token.new(type: :eof, literal: "", line: line) | tokens])
   end
 
-  @spec tokenize([String.t()], [Token], integer) :: [Token]
   defp tokenize(chars = [ch | rest], tokens, num_lines) do
     cond do
       is_newline(ch) -> tokenize(rest, tokens, num_lines + 1)
@@ -26,7 +28,6 @@ defmodule Lisper.Lexer do
     end
   end
 
-  @spec read_identifier([String.t()], [Token], integer) :: Token
   defp read_identifier(chars, tokens, line) do
     {identifier, rest} = Enum.split_while(chars, &is_letter/1)
 
@@ -36,28 +37,25 @@ defmodule Lisper.Lexer do
     tokenize(rest, [token | tokens], line)
   end
 
-  @spec read_int([String.t()], [Token], integer) :: Token
   defp read_int(chars, tokens, line) do
     {number, rest} = Enum.split_while(chars, &is_digit/1)
 
     number = Enum.join(number)
-    token = Token.new(type: :atom, literal: number, line: line)
+    token = Token.new(type: :int, literal: number, line: line)
 
     tokenize(rest, [token | tokens], line)
   end
 
-  @spec read_float([String.t()], [Token], integer) :: Token
   defp read_float(chars, tokens, line) do
     with {number, rest} <- Enum.split(chars, 2),
          {decimal, _rest} <- Enum.split_while(rest, &is_digit/1) do
       number = "#{number}#{decimal}"
-      token = Token.new(type: :atom, literal: number, line: line)
+      token = Token.new(type: :float, literal: number, line: line)
 
       tokenize(rest, [token | tokens], line)
     end
   end
 
-  @spec read_binary_operator([String.t()], [Token], integer) :: Token
   defp read_binary_operator(chars, tokens, line) do
     {literal, rest} = Enum.split(chars, 2)
 
@@ -73,7 +71,6 @@ defmodule Lisper.Lexer do
     tokenize(rest, [token | tokens], line)
   end
 
-  @spec read_string([String.t()], [Token], integer) :: Token
   defp read_string([_quote | rest], tokens, line) do
     {string, [_quote | rest]} = Enum.split_while(rest, &(!is_quote(&1)))
 
@@ -83,7 +80,6 @@ defmodule Lisper.Lexer do
     tokenize(rest, [token | tokens], line)
   end
 
-  @spec read_next_char([String.t()], [Token], integer) :: Token
   defp read_next_char(_chars = [ch | rest], tokens, line) do
     token =
       case ch do

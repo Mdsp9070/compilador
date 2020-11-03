@@ -1,12 +1,15 @@
 defmodule Lisper.CLI do
+  @moduledoc """
+  Main program to run
+  """
+
   alias Lisper.Lexer
-  alias Lisper.Parser
 
   def main(args \\ []) do
     {:ok, input} = File.read(List.first(args))
 
-    la = input |> Lexer.tokenize() |> Parser.parse()
+    result = input |> Lexer.tokenize()
 
-    IO.inspect(la)
+    IO.inspect(result)
   end
 end

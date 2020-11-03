@@ -1,4 +1,8 @@
 defmodule Lisper.Token do
+  @moduledoc """
+  Define Lisp grammar to generate tokens
+  """
+
   @enforce_keys [:type, :literal, :line]
   defstruct [:type, :literal, :line]
 
@@ -18,7 +22,7 @@ defmodule Lisper.Token do
     "or" => :or,
     "not" => :not,
     "defvar" => :defvar,
-    "write" => :write,
+    "print" => :print,
     "vector" => :vector
   }
 
@@ -28,6 +32,8 @@ defmodule Lisper.Token do
     # identifiers
     string: "STRING",
     atom: "ATOM",
+    int: "INT",
+    float: "FLOAT",
     # operators
     plus: "+",
     minus: "-",
@@ -39,12 +45,6 @@ defmodule Lisper.Token do
     lt: "<",
     gt_eq: ">=",
     lt_eq: "<=",
-    max: "MAX",
-    min: "MIN",
-    mod: "MODULUS",
-    rem: "REMAINDER",
-    incf: "INCREMENT",
-    decf: "DECREMENT",
     and: "AND",
     or: "OR",
     not: "NOT",
@@ -58,10 +58,16 @@ defmodule Lisper.Token do
     nil: "NIL",
     if: "IF",
     lambda: "LAMBDA",
-    setq: "ASSIGN",
     defvar: "DEFVAR",
-    write: "WRITE",
-    vector: "VECTOR"
+    defun: "DEFUN",
+    print: "PRINT",
+    vector: "VECTOR",
+    max: "MAX",
+    min: "MIN",
+    mod: "MODULUS",
+    rem: "REMAINDER",
+    incf: "INCREMENT",
+    decf: "DECREMENT"
   }
 
   def new(type: type, literal: literal, line: line) when is_atom(type) and is_binary(literal) do

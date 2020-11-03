@@ -5,6 +5,8 @@ defmodule Lisper.Ast.Sequence do
   (setq v1 (vector 1 2 3 4 5 6))
   """
 
+  alias Lisper.Ast.Node
+
   @enforce_keys [:token, :elements]
   defstruct [:token, :elements]
 
