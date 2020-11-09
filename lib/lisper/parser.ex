@@ -163,4 +163,59 @@ defmodule Lisper.Parser do
 
     {p, statement}
   end
+
+  defp parse_expression(p, precedence) do
+    case prefix_parse_fns(p.curr.type) do
+      {p, nil} ->
+        error =
+          "Cannot parse this expression, this is the last token -> :#{p.curr} on line #{
+            p.curr.line
+          }"
+
+        p = add_error(p, error)
+
+        {:error, p, nil}
+
+      {p, parse_function} ->
+        {p, parsed_expression} = parse_function(p.curr, p)
+
+        {:ok, p, parsed_expression}
+    end
+  end
+
+  defp prefix_parse_fns(:rparen, p) do
+    p = skip_close_paren(p)
+
+    prefix_parse_fns(p.curr, p)
+  end
+
+  defp prefix_parse_fns(:lparen, p), do: parse_list_
+  defp prefix_parse_fns(:atom, p), do: parse_atom(p)
+
+  defp prefix_parse_fns(:int, p),
+    # we can skip close parens
+    do: defp(skip_close_paren(p)) do
+    if p.peek.type == :rparen, do: next_token(p), else: p
+  end
+
+  defp curr_precedence(p), do: Map.get(@precedences, p.curr.type, @precedences_numbers.lowest)
+
+  defp peek_precedence(p), do: Map.get(@precedences, p.peek.type, @precedences_numbers.lowest)
+
+  defp expect_peek(%Parser{peek: peek} = p, expected_type) do
+    if peek.type == expected_type do
+      p = next_token(p)
+
+      {:ok, p, peek}
+    else
+      error =
+        "Expected next toke to be :#{expected_type}, got :#{peek.type} on line #{peek.line} instead"
+
+      p = add_error(p, error)
+
+      {:error, p, nil}
+    end
+  end
+
+  defp add_error(p, msg), do: %{p | errors: p.errors ++ [msg]}
 end

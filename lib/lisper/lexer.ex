@@ -19,7 +19,7 @@ defmodule Lisper.Lexer do
 
   # when we do not have any more chars, that's the end of file
   # or 'EOF', so we could add the eof token to the list end
-  defp tokenize(_chars = [], tokens, line) do
+  defp tokenize([] = _chars, tokens, line) do
     Enum.reverse([Token.new(type: :eof, literal: "", line: line) | tokens])
   end
 
@@ -31,7 +31,7 @@ defmodule Lisper.Lexer do
   # a digit could be either an int or a float
   # maybe a two digit operator (>= or /=)
   # none of these? well, let's try to read the next char
-  defp tokenize(chars = [ch | rest], tokens, num_lines) do
+  defp tokenize([ch | rest] = chars, tokens, num_lines) do
     cond do
       is_newline?(ch) -> tokenize(rest, tokens, num_lines + 1)
       is_whitespace?(ch) -> tokenize(rest, tokens, num_lines)
@@ -115,7 +115,7 @@ defmodule Lisper.Lexer do
   # none of above?
   # no problem, we have a token for you!
   # maybe one of these:
-  defp read_next_char(_chars = [ch | rest], tokens, line) do
+  defp read_next_char([ch | rest] = _chars, tokens, line) do
     token =
       case ch do
         "=" -> Token.new(type: :equal, literal: ch, line: line)
